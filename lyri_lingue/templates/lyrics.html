@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ track['title'] }} - Lyrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>LyriLingual</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="lyrics">
+        <div class="container">
+            <h2>{{ track['title'] }} by {{ track['artist'] }}</h2>
+            <div class="lyrics-text">
+                {{ track['lyrics'] }}
+            </div>
+            <div class="actions">
+                <a href="#" target="_blank" class="action-button">Open in Spotify</a>
+                <a href="#" target="_blank" class="action-button">Open in Apple Music</a>
+                <a href="#" target="_blank" class="action-button">Open in Other</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 LyriLingual. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
