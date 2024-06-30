@@ -5,7 +5,7 @@ from pathlib import Path
 import requests
 import toml
 
-from lyri_lingue.structures import TrackData
+from lyri_lingual.structures import TrackData
 
 BASE_URL = "https://api.musixmatch.com/ws/1.1/"
 API_KEY = None  # still initialized when imported
@@ -54,7 +54,7 @@ def get_tracks_from_lyrics(lyrics: str, track_count: int) -> list[TrackData]:
     endpoint = "track.search"
     params = {
         "q_lyrics": lyrics,
-        "f_lyrics_language": "en",
+        "f_lyrics_language": "es",
         "page_size": track_count,
         "page": 1,
         "s_track_rating": "desc",

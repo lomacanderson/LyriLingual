@@ -9,7 +9,7 @@ description = "A music lyrics-based website."
 dependencies = [
     "flask~=3.0.3",
     "requests~=2.32.3",
-    "toml~=0.12.2",
+    "toml~=0.10.2",
 ]
 
 [project.optional-dependencies]

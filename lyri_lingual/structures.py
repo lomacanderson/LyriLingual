@@ -27,6 +27,6 @@ class TrackData:
 
         :return: Track lyrics.
         """
-        from lyri_lingue.api import get_lyrics_from_id
+        from lyri_lingual.api import get_lyrics_from_id
 
         return get_lyrics_from_id(self.id)
