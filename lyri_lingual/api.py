@@ -1,15 +1,16 @@
-"""Fetch track data from API."""
+"""Fetch track data and translations from API."""
 
 from pathlib import Path
 
 import requests
 import toml
+import deepl
 
 from lyri_lingual.structures import TrackData
 
 BASE_URL = "https://api.musixmatch.com/ws/1.1/"
-API_KEY = None  # still initialized when imported
-
+MUSIX_API_KEY = None  # still initialized when imported
+DEEPL_API_KEY = None
 
 def _init_api_key(file_path: Path) -> None:
     """
@@ -20,9 +21,10 @@ def _init_api_key(file_path: Path) -> None:
     """
     with open(file_path, "r") as file:
         config = toml.load(file)
-        global API_KEY
-        API_KEY = config.get("api_key")
-
+        global MUSICX_API_KEY
+        global DEEPL_API_KEY
+        MUSICX_API_KEY = config.get("musixmatch_api_key")
+        DEEPL_API_KEY = config.get("deepl_api_key")
 
 def _query_api(endpoint: str, params: dict) -> dict:
     """
@@ -32,7 +34,7 @@ def _query_api(endpoint: str, params: dict) -> dict:
     :param params: Dictionary of query parameters to include in the request.
     :return: The JSON response from the API.
     """
-    params["apikey"] = API_KEY
+    params["apikey"] = MUSICX_API_KEY
 
     response = requests.get(BASE_URL + endpoint, params=params)
 
@@ -120,6 +122,11 @@ def get_lyrics_from_id(track_id: int) -> str:
 
     lyrics = response["message"]["body"]["lyrics"]["lyrics_body"]
     return lyrics
+
+def translate_text(lang: str, text: str) -> str:
+    translator = deepl.Translator(DEEPL_API_KEY)
+    result = translator.translate_text(text, target_lang=lang)
+    return result.text
 
 
 _init_api_key(Path(__file__).parent.parent / "config.toml")
